@@ -1,39 +1,31 @@
 # Azure Data Factory DevOps Project
 
 ## Overview
-This project implements a CI/CD pipeline for Azure Data Factory, automating validation, ARM template generation, and deployment. It supports ingestion and transformation of COVID-related datasets with robust data pipelines and Azure DevOps automation.
+This project establishes a CI/CD pipeline for Azure Data Factory using Azure DevOps to automate validation, deployment, and data processing workflows. 
 
 ---
 
 ## Key Features
 
 ### Build Pipeline Automation
-- **Validation & Deployment**: The `adf-build-pipeline.yml` validates Azure Data Factory resources and generates ARM templates for deployment.
-- **Artifact Publishing**: Automatically packages and publishes ARM templates to Azure DevOps for release pipelines.
+- **Validation & ARM Template Generation**: Automates validation of Azure Data Factory resources and builds reusable ARM templates for consistent, repeatable deployments.
+
+### Data Pipelines
+- **Ingestion Pipelines**: Automates the loading of raw datasets (e.g., cases, deaths, hospital admissions, population data) into Azure Data Lake Storage Gen2, leveraging lookup and batch processing activities.
+- **Processing Pipelines**: Transforms data through aggregations, joins with metadata, and pivots to create clean, structured outputs for analysis.
+- **SQLize Pipelines**: Formats processed data for storage in SQL databases, ensuring compatibility with downstream analytical tools.
 
 ### Data Transformation Flows
-1. **Data Flow: `df_transform_cases_deaths`**
-   - Filters European cases and performs pivot transformations to summarize cases and deaths by country.
-   - Enriches datasets using metadata lookups and outputs results to Azure Data Lake Storage Gen2.
-
-2. **Data Flow: `df_transform_hospital_admissions`**
-   - Aggregates hospital admission data into weekly and daily summaries.
-   - Joins with date and country dimensions, pivoting results for standardized reporting.
-
-### Data Ingestion Pipelines
-- **Pipeline: `pl_ingest_ecdc_data`**  
-  - Automates ingestion of ECDC data with lookup and `ForEach` activities for batch processing.
-- **Pipeline: `pl_ingest_population_data`**  
-  - Processes raw population datasets, cleans columns, and formats data for analysis.
-
-### Storage Integration
-- **Azure Databricks Mounts**: Configured raw, processed, and lookup containers in ADLS Gen2 using secure credentials.
+- **Scalable Transformations**: Executes column-level transformations like renaming, pivoting, and aggregation to structure data for analysis.
+- **Optimized Storage**: Outputs are structured into containers (raw, processed, lookup) in ADLS Gen2 for efficient access.
 
 ### Scheduling & Automation
-- **Tumbling Window Triggers**: Automated pipeline executions based on scheduled intervals for consistent data processing.
+- **Triggering**: Tumbling window triggers ensure pipelines run on a scheduled cadence for consistent data refreshes.
+- **Integration**: Seamlessly integrates with Azure DevOps to streamline development and deployment workflows.
 
 ---
 
 ## Results
-- **Streamlined Automation**: CI/CD integration with Azure DevOps simplifies validation and deployments.
-- **Efficient Data Processing**: Data flows handle large datasets with robust transformations and scalable storage solutions.
+- **Automated CI/CD**: Simplifies validation and deployment processes for Azure Data Factory.
+- **Efficient Data Processing**: Ensures robust, scalable workflows for managing large datasets and generating structured outputs.
+
