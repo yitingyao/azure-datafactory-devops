@@ -1,0 +1,9 @@
+{
+	"name": "covid-reporting-adf-tina",
+	"location": "canadacentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "323ebd84-7fc9-4e6c-bae6-616735492add",
+		"tenantId": "b9f152e8-1d26-4d96-91e1-ab438be96633"
+	}
+}
